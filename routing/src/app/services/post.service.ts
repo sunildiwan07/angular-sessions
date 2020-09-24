@@ -11,4 +11,8 @@ export class PostService {
   getUsers(){
     return this.http.get('http://jsonplaceholder.typicode.com/users')
   }
+
+  getUser(id:number){
+    return this.http.get('http://jsonplaceholder.typicode.com/users/' + id)
+  }
 }
