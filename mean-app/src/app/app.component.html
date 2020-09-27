@@ -1,0 +1,47 @@
+<h2 class="text-center">Student Registration Form</h2>
+<br>
+<div class="mat-elevation-z8 container">
+  <br>
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input [formControl]="myname" placeholder="Your Name" matInput [errorStateMatcher]="mymatcher">
+      <mat-error *ngIf="myname.hasError('required')">Name is <strong>required</strong></mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input [formControl]="myemail" placeholder="Your Email" matInput [errorStateMatcher]="mymatcher">
+      <mat-error *ngIf="myemail.hasError('email') && !myemail.hasError('required')">Please enter a valid mail address <strong>required</strong></mat-error>
+      <mat-error *ngIf="myemail.hasError('required')">Email is <strong>required</strong></mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input [formControl]="mycourse" placeholder="Select Course" type="text" aria-label="Number" matInput [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">{{option}}</mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <section class="example-section">
+      <mat-checkbox class="example-margin" name="weekends" [(ngModel)]="weekends">Weekends</mat-checkbox>
+      <mat-checkbox class="example-margin" name="weekdays" [(ngModel)]="weekdays">WeekDays</mat-checkbox>
+    </section>
+
+    <section class="example-section">
+      <label class="example-margin">Align:</label>
+      <mat-radio-group name="labelPosition" [(ngModel)]="batchType">Weekends</mat-radio-group>
+      <mat-radio-button class="example-margin" value="Class Room">Class room</mat-radio-button>
+      <mat-radio-button class="example-margin" value="Online">Online</mat-radio-button>
+    </section>
+
+    <mat-form-field class="example-full-width">
+      <input [formControl]="mypaymentDate" placeholder="Choose a date" matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <br>
+    <button (click)="registerStudent();" class="btn btn-danger btn-lg">Register Student!</button>
+  </form>
+</div>
+
+
+<router-outlet></router-outlet>
